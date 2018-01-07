@@ -1,0 +1,91 @@
+<%= form_with(model: person, local: true) do |form| %>
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person 
+      from being saved:</h2>
+
+      <ul>
+      <% person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :person_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :secret %>
+    <%= form.text_field :secret, id: :person_secret %>
+  </div>
+  
+  <% nations = { 'United States of America' => 'USA', 'Canada' => 'Canada', 
+                  'Mexico' => 'Mexico', 'United Kingdom' => 'UK'} %>
+                  
+  <div class="field">
+    <fieldset>
+      <legend>Country</legend>
+      <% list = nations.sort
+      list.each do |x| %>
+        <%= form.radio_button :country, x[1] %>
+        <label for="<%= ("person_country_" + x[1].downcase) %>"><%= x[0] %>
+        </label><br>
+      <% end %>
+    </fieldset>
+  </div>
+  
+  <div class="field">
+    <p>
+      <%= form.label :country %>
+      <% list = nations.sort %>
+      <%= form.select :country, list %>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :person_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :person_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :can_send_email %>
+    <%= form.check_box :can_send_email, id: :person_can_send_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :graduation_year %>
+    <%= form.number_field :graduation_year, id: :person_graduation_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body_temperature %>
+    <%= form.text_field :body_temperature, id: :person_body_temperature %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :person_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthday %>
+    <%= form.date_select :birthday, id: :person_birthday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :favorite_time %>
+    <%= form.time_select :favorite_time, id: :person_favorite_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
